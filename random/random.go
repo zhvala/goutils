@@ -8,12 +8,15 @@ import (
 /* 随机生成字符串 */
 const (
 	letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	numberBytes = "0123456789abcdef"
+	hexBytes    = "0123456789abcdef"
 )
 
-// LetterString return pure letter string
+var (
+	randomEngine = rand.New(rand.NewSource(time.Now().UnixNano()))
+)
+
+// LetterString return a pure letter string.
 func LetterString(n int) string {
-	var randomEngine = rand.New(rand.NewSource(time.Now().UnixNano()))
 	result := make([]byte, n)
 	for i := range result {
 		result[i] = letterBytes[randomEngine.Intn(len(letterBytes))]
@@ -21,12 +24,11 @@ func LetterString(n int) string {
 	return string(result)
 }
 
-// HexString return hex string
+// HexString return a n bits hex string.
 func HexString(n int) string {
-	var randomEngine = rand.New(rand.NewSource(time.Now().UnixNano()))
 	result := make([]byte, n)
 	for i := range result {
-		result[i] = numberBytes[randomEngine.Intn(len(numberBytes))]
+		result[i] = hexBytes[randomEngine.Intn(len(hexBytes))]
 	}
 	return string(result)
 }
