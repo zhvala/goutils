@@ -1,6 +1,7 @@
 package strtools
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -11,6 +12,13 @@ func TestFastByteToStr(t *testing.T) {
 	output := BytesToString(byteData)
 	if output != strData {
 		t.Fatal(output, strData)
+	}
+}
+
+func TestFastStrToByte(t *testing.T) {
+	output := StringToBytes(strData)
+	if !reflect.DeepEqual(byteData, output) {
+		t.Fatal(string(output), string(byteData))
 	}
 }
 
